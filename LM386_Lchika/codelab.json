@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2021-10-16T14:49:27Z",
+  "id": "LM386_Lchika",
+  "duration": 5,
+  "title": "オーディオアンプLM386を使ってLEDを光らせる",
+  "authors": "pokibon",
+  "summary": "LM386でLチカ",
+  "source": "13lrx-lUwSrPBxaXor1Joyq8WzJOrtXcxYjMGOQXgUHc",
+  "theme": "100-basic",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "100-Basic"
+  ],
+  "tags": [],
+  "url": "LM386_Lchika"
+}

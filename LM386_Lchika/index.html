@@ -1,0 +1,91 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>オーディオアンプLM386を使ってLEDを光らせる</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="LM386_Lchika"
+                  title="オーディオアンプLM386を使ってLEDを光らせる"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="概要" duration="5">
+        <p>オーディオアンプIC LM386を使い、入力の音楽に合わせてLEDを光らせてみます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img\\d66af16dac7307f6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img\\37e6c8a07f5da212.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="必要なもの" duration="0">
+        <ul>
+<li><a href="https://www.amazon.co.jp/HiLetgo%C2%AE-5%E5%80%8B%E3%82%BB%E3%83%83%E3%83%88-LM386-20%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%BA-5V-12V/dp/B011IGZBBC/ref=sr_1_1_sspa?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&dchild=1&keywords=LM386&qid=1634391587&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExSDVGWFZXRVYxMEsmZW5jcnlwdGVkSWQ9QTAwNjcwNTExWE05TEoyOVc1TEpEJmVuY3J5cHRlZEFkSWQ9QTJKV0lGVktZTksxQjQmd2lkZ2V0TmFtZT1zcF9hdGYmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl" target="_blank">LM386アンプ基板</a></li>
+<li>LED 1～2個<br>なるべくVfが低いものがのぞましいです。ここではVf=1.8Vのものを使用しました。</li>
+<li>3.5mm miniプラグ<br>入力ソースとなるオーディオ機器に接続できるもの</li>
+<li>スピーカー<br>ダイソー300円スピーカーを使用しました。</li>
+<li>1kΩ 抵抗</li>
+<li>電源（9～12V）<img style="width: 481.36px" src="img\\4303620e126be283.png"><img style="width: 481.36px" src="img\\31b580c4b22b4a.png"></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="全体回路図" duration="0">
+        <ul>
+<li>LM386の出力が交流のため、LEDはプラス方向とマイナス方向に2個接続します。</li>
+<li>1kΩの抵抗はもう少し小さめがよさそうです。</li>
+<li>LEDとスピーカーは同時に動作できますが、スピーカーから出る音は爆音になりますので注意してください。</li>
+</ul>
+<p class="image-container"><img style="width: 481.36px" src="img\\d4302833d16ffa2c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="出力波形" duration="0">
+        <ul>
+<li>入力の半固定抵抗は最大とし、入力にFunction generatorから１kHzの方形波を0.2V PPで入力した結果を示します。</li>
+<li>LM386の出力コンデンサの電圧は、無負荷状態で、約3.6VPPで飽和しました。<br>LEDのVfが1.8V程度ですから、LEDを光らすための出力としてはギリギリであること解りました。</li>
+<li>スピーカーを並列に接続しても出力電圧はほぼ同じでした。</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img\\55b75abe37dded9.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <ul>
+<li>LM386の出力でLEDを光らすことができた</li>
+<li>LM386の出力電圧は、飽和時で約3.6V PPで、LEDを光らすにはギリギリの電圧であることがわかった</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
