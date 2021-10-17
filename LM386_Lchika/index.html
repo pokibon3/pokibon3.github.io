@@ -23,12 +23,12 @@
   <google-codelab-analytics gaid=""></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="LM386_Lchika"
-                  title="オーディオアンプIC LM386を使ってLEDを光らせる"
+                  title="オーディオアンプLM386を使ってLEDを光らせる"
                   environment="web"
                   feedback-link="">
     
       <google-codelab-step label="概要" duration="5">
-        <p>オーディオアンプIC LM386を使い、入力の音楽に合わせてLEDを光らせてみます。</p>
+        <p>オーディオアンプIC LM386を使い、入力の音楽に合わせてLEDを光らせてみました。</p>
 <p class="image-container"><img style="width: 601.70px" src="img\\d66af16dac7307f6.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img\\37e6c8a07f5da212.png"></p>
 
@@ -38,32 +38,56 @@
       <google-codelab-step label="必要なもの" duration="0">
         <ul>
 <li><a href="https://www.amazon.co.jp/HiLetgo%C2%AE-5%E5%80%8B%E3%82%BB%E3%83%83%E3%83%88-LM386-20%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%BA-5V-12V/dp/B011IGZBBC/ref=sr_1_1_sspa?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&dchild=1&keywords=LM386&qid=1634391587&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExSDVGWFZXRVYxMEsmZW5jcnlwdGVkSWQ9QTAwNjcwNTExWE05TEoyOVc1TEpEJmVuY3J5cHRlZEFkSWQ9QTJKV0lGVktZTksxQjQmd2lkZ2V0TmFtZT1zcF9hdGYmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl" target="_blank">LM386アンプ基板</a></li>
-<li>LED 1～2個<br>なるべくVfが低いものがのぞましいです。ここではVf=1.8Vのものを使用しました。</li>
-<li>3.5mm miniプラグ<br>入力ソースとなるオーディオ機器に接続できるもの</li>
+</ul>
+<p>Amazonで5個850円で購入</p>
+<ul>
+<li>LED 1～2個<br>なるべくVfが低いものが望ましい。ここではVf=1.8Vのものを使用</li>
+<li>3.5mm miniプラグ<br>入力ソースとなるオーディオ機器等に接続できるもの</li>
 <li>スピーカー<br>ダイソー300円スピーカーを使用しました。</li>
 <li>1kΩ 抵抗</li>
-<li>電源（9～12V）<img style="width: 481.36px" src="img\\4303620e126be283.png"><img style="width: 481.36px" src="img\\31b580c4b22b4a.png"></li>
 </ul>
+<p>別途調整が必要です。</p>
+<ul>
+<li>電源（6～10V）<br>使用しているLM386の定格がリビジョンにより最大12Vのため、注意が必要です。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="LM386アンプ基板概要" duration="0">
+        <ul>
+<li> 外観</li>
+</ul>
+<p class="image-container"><img style="width: 481.36px" src="img\\4303620e126be283.png"></p>
+<ul>
+<li>回路図<br>回路図中のR1,C1（ゲイン調整用）、C2（バイパスコンデンサ）は未実装でした。<br></li>
+</ul>
+<p class="image-container"><img style="width: 561.50px" src="img\\f9fc9b90380f35e8.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="全体回路図" duration="0">
-        <ul>
+        <p>購入したLM386アンプモジュールとLED、スピーカーの接続を以下に示します。<br></p>
+<ul>
 <li>LM386の出力が交流のため、LEDはプラス方向とマイナス方向に2個接続します。</li>
 <li>1kΩの抵抗はもう少し小さめがよさそうです。</li>
 <li>LEDとスピーカーは同時に動作できますが、スピーカーから出る音は爆音になりますので注意してください。</li>
 </ul>
-<p class="image-container"><img style="width: 481.36px" src="img\\d4302833d16ffa2c.png"></p>
+<p class="image-container"><img style="width: 556.70px" src="img\\dc4ec5ca23690b8e.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="出力波形" duration="0">
-        <ul>
-<li>入力の半固定抵抗は最大とし、入力にFunction generatorから１kHzの方形波を0.2V PPで入力した結果を示します。</li>
-<li>LM386の出力コンデンサの電圧は、無負荷状態で、約3.6VPPで飽和しました。<br>LEDのVfが1.8V程度ですから、LEDを光らすための出力としてはギリギリであること解りました。</li>
-<li>スピーカーを並列に接続しても出力電圧はほぼ同じでした。</li>
+        <p> 入力の半固定抵抗は最大とし、入力にFunction generatorから１kHzの方形波を0.2V PPで入力した結果を示します。</p>
+<ul>
+<li>LM386の出力コンデンサの電圧は、無負荷状態で、約3.6VPPで飽和しました。</li>
+</ul>
+<p>規格上のゲインが26dBなので、ほぼ一致しています。</p>
+<ul>
+<li>LEDのVfが1.8V程度なので、LEDを光らすための出力としてはギリギリ。</li>
+<li>スピーカーを並列に接続しても出力電圧はほぼ同じでした。<br>スピーカーの誘導性の負荷により波形は乱れます。</li>
 </ul>
 <p class="image-container"><img style="width: 601.70px" src="img\\55b75abe37dded9.png"></p>
 
@@ -72,8 +96,8 @@
     
       <google-codelab-step label="まとめ" duration="0">
         <ul>
-<li>LM386の出力でLEDを光らすことができた</li>
-<li>LM386の出力電圧は、飽和時で約3.6V PPで、LEDを光らすにはギリギリの電圧であることがわかった</li>
+<li>LM386の出力でLEDを光らすことができた。</li>
+<li>LM386のAF出力電圧は飽和出力時で約3.6V PPで、LEDを光らすにはギリギリの電圧であることが判明した。LM386やLEDの個体差で光らない可能性もある。</li>
 </ul>
 
 
