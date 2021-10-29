@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2021-10-29T03:04:39Z",
+  "id": "T12_SolderStation",
+  "duration": 5,
+  "title": "T12 ステーション型はんだごてHack",
+  "authors": "pokibon",
+  "summary": "T12 Soldering Station Hack",
+  "source": "1TTjP6_WCiUQlSefXf8wtZO52GIAXu_K60bQ6SeGLxE8",
+  "theme": "100-basic",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "100-Basic"
+  ],
+  "tags": [],
+  "url": "T12_SolderStation"
+}
