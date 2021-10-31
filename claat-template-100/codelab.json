@@ -2,13 +2,13 @@
   "environment": "web",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
-  "updated": "2021-10-16T06:20:27Z",
+  "updated": "2021-10-16T13:26:10Z",
   "id": "claat-template-100",
   "duration": 35,
   "title": "タイトル",
-  "authors": "SORACOM, INC.",
+  "authors": "pokibon",
   "summary": "CLaaT を利用したコンテンツ作成のテンプレートとして利用可能なファイルです。",
-  "source": "1l16_WaaEi_CqltqZ37CzOghv_xaybOpW94YCddcVidw",
+  "source": "1wYVb4vq5hDzC0CGkA3g87t59n0cyEBdKWaj729I7s8Q",
   "theme": "100-basic",
   "status": [
     "published"

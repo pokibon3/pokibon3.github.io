@@ -31,7 +31,7 @@
         <p>CLaaT を利用したコンテンツ作成のテンプレートとして利用可能なファイルです。</p>
 <h2 is-upgraded>できるようになる事</h2>
 <ul>
-<li>A には c に向いた話</li>
+<li>A には b に向いた話</li>
 <li>B には a に相応しい任務</li>
 </ul>
 <h2 is-upgraded>このハンズオンでサポートしない事 (前提知識)</h2>
@@ -55,7 +55,7 @@
         <p>よく使いそうな書式をまとめました。</p>
 <h2 is-upgraded>見出し</h2>
 <p>見出しは作業区切りの単位として利用します。特に<strong>「見出し1」はナビゲーション(ページ)の区切り</strong>となる特別な書式です。</p>
-<p class="image-container"><img style="width: 500.00px" src="img\\b3782f9730e56d1.png"></p>
+<p class="image-container"><img style="width: 500.00px" src="img\\892b4ca8a98fbe02.png"></p>
 <h2 is-upgraded>テキストスタイル</h2>
 <p><strong>太字</strong>、<em>斜体</em>がサポートされていますが、和文に斜体が適用されないので、結局役に立つのは太字のみとなります。下線や文字色は反映されません。</p>
 <p>またフォントに <strong>Courier New</strong> を指定した英文は <code>This is text</code> のように固定幅フォントとして設定されます。</p>
@@ -92,102 +92,6 @@ exit 0</code></pre>
 <p class="image-container"><img style="width: 402.00px" src="img\\f09c61ccdd540db2.png"></p>
 <h3 is-upgraded>やってみよう</h3>
 <p>↓ ここにカーソルを合わせて［挿入］&gt;［表］</p>
-<pre><code>#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-import numpy
-
-import PIL.Image
-import PIL.ImageDraw
-import PIL.ImageFont
-
-#from escpos.printer import Usb
-from escpos import *
-
-from time import sleep
-
-g_pos_y = 0
-
-def draw_text(img, text, align=&#39;left&#39;, size=24):
-  global g_pos_y
-  draw = PIL.ImageDraw.Draw(img)
-  draw.font = PIL.ImageFont.truetype(
-    &#39;AquaKana.ttc&#39;, size)
-
-  img_size = numpy.array(img.size)
-  txt_size = numpy.array(draw.font.getsize(text))
-  pos = (img_size - txt_size) / 2
-
-  if align == &#39;center&#39;:
-    x = ((img_size - txt_size) / 2)[0]
-  elif align == &#39;right&#39;:
-    x = (img_size - txt_size)[0]
-  else:
-    x = 0
-
-  #draw.text(pos, text, (0, 0, 0))
-  draw.text((x, g_pos_y), text, (0, 0, 0))
-  g_pos_y += size
-
-def create_img(name, tadashi, copy=&#39;&#39;):
-  global g_pos_y
-  g_pos_y = 0
-
-  img = PIL.Image.new(&#39;RGB&#39;, (384, 550), (255,255,255))
-
-  draw_text(img, &#39;領収書&#39; + copy, align=&#39;center&#39;, size=48)
-  draw_text(img, &#39; &#39;)
-  draw_text(img, &#39;平成29年10月31日&#39;, align=&#39;right&#39;)
-  draw_text(img, &#39; &#39;)
-  draw_text(img, name + &#39; 様&#39;, size=36)
-  draw_text(img, &#39; &#39;)
-  draw_text(img, &#39;===================&#39;, align=&#39;center&#39;)
-  draw_text(img, &#39;金額 ¥1,000円&#39;, align=&#39;center&#39;, size=36)
-  draw_text(img, &#39;===================&#39;, align=&#39;center&#39;)
-  draw_text(img, &#39; &#39;)
-  draw_text(img, &#39;但し、&#39;)
-  draw_text(img, tadashi + &#39;として&#39;)
-  draw_text(img, &#39;上記正に領収致しました。&#39;)
-  draw_text(img, &#39;                                &#39;)
-  draw_text(img, &#39;      〒xxx-xxxx xxx市xxxxx&#39;, align=&#39;right&#39;)
-  draw_text(img, &#39;                 xx公民館内&#39;, align=&#39;right&#39;)
-  draw_text(img, &#39;                   xx自治会&#39;, align=&#39;right&#39;, size=36)
-  draw_text(img, &#39;               担当：   &#39;, align=&#39;right&#39;)
-  gray = img.convert(&#39;L&#39;)
-  img = gray.point(lambda x: 0 if x &lt; 128 else 255)
-  #img.show()
-  img.save(&#39;output.png&#39;)
-
-def main():
-  names = [
-    &#39;神社 太郎&#39;,
-    &#39;神社 次郎&#39;,
-    &#39;神社 三郎&#39;,
-  ]
-  tadashi = &#39;xx神社祭典運営費拠出金&#39;
-
-  for name in names:
-    create_img(name, tadashi)
-    sleep(0.5)
-    p = printer.Serial(&#34;COM5:&#34;)
-    p.image(&#39;rabbithouse.png&#39;)
-    p.text(&#39;\n\n\n&#39;)
-
-    print(&#39;Please hit any key&#39;)
-    input()
-
-  #  create_img(name, tadashi, copy=&#39; ＜控＞&#39;)
-    sleep(0.5)
-#
-#     p = printer.Serial(&#34;COM5:&#34;)
-    p.image(&#39;rabbithouse.png&#39;)
-    p.text(&#39;\n\n\n&#39;)
-
-    print(&#39;Please hit any key&#39;)
-    input()
-
-
-main()</code></pre>
 <p>コードは<a href="https://gist.githubusercontent.com/ma2shita/b9589598e8e2868b544d92093c85a5fe/raw/2ad3f010f6550a3baa84c649219733aa7d8a0cab/callee_soracom_funk.py" target="_blank">この Python コード</a>を使ってください。</p>
 <h2 is-upgraded>情報ボックス</h2>
 <p>［挿入］&gt;［表］で 1x1 の表を作り、表の中の背景色を指定のものに設定すると情報ボックスとして表示されます。</p>
