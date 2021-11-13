@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "-h",
+  "updated": "2021-11-13T14:50:34Z",
+  "id": "AKBONE_picovaders",
+  "duration": 5,
+  "title": "タイトル",
+  "authors": "pokibon",
+  "summary": "AKBONE2020でpicovadersを動かす",
+  "source": "1f7ert6wRPhKcis4WBwpPZPouY8VuJhr1Iug_wdFAPMs",
+  "theme": "100-basic",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "100-Basic"
+  ],
+  "tags": [],
+  "url": "AKBONE_picovaders"
+}
