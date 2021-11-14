@@ -28,11 +28,12 @@
                   feedback-link="">
     
       <google-codelab-step label="概要" duration="5">
-        <p>AKBONE2020にARDUBOYを移植しpicovadersを動かしてみます。<br><img style="width: 601.70px" src="img\\b4e29371026a4cc4.png"></p>
+        <p>2021.11.14</p>
+<p>AKBONE2020にARDUBOYを移植しpicovadersを動かしてみます。<br><img style="width: 601.70px" src="img\\b4e29371026a4cc4.png"></p>
 <h2 is-upgraded>できるようになる事</h2>
 <ul>
 <li>LGT8F328用のArduino開発環境を構築します。</li>
-<li>ARDUBOYの主要ライブラリをインストールします。</li>
+<li>Arduboyの主要ライブラリをインストールします。</li>
 <li>Picovadersを動かします。</li>
 </ul>
 <h2 is-upgraded>用語</h2>
@@ -60,8 +61,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Arduboyライブラリのインストール" duration="0">
-        <p>ここで作成したライブラリ一式は、以下のGitHubに格納してあります。</p>
-<p>GitHubのportableフォルダ一式をArduinoフォルダの直下にコピーすることで簡単に環境を構築できます。</p>
+        <p>ここで修正したライブラリやpicovadersのソース一式は、以下のGitHubに格納してあります。GitHubのportableフォルダ一式をArduinoフォルダの直下にコピーすることで簡単に環境を構築できると思います。</p>
 <p><a href="https://github.com/pokibon3/AKBONE2020" target="_blank">https://github.com/pokibon3/AKBONE2020</a></p>
 <p>portableフォルダの構築内容を以下に示します。</p>
 <p>AKBONE2020は使用できるI/Oピンが少ないので、今回はOLEDはI2Cタイプで動作するSLIMBOY - Arduboy2 port to Arduino Nano and I2C displayを使用することにします。</p>
@@ -86,8 +86,9 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ピンアサイン" duration="0">
+      <google-codelab-step label="OLEDとボタンの接続" duration="0">
         <p>picovadersを動かすためには、AKIBONE2020にI2C OLEDと最低3つのタクトSW（BUTTON_A, BUTTON_LEFT, BUTTON_RIGHT を接続する必要があります。</p>
+<p class="image-container"><img style="width: 601.70px" src="img\\db7478b41ee52993.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img\\efe4651d50cfc050.png"></p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>No.</p>
@@ -173,7 +174,6 @@
 </td><td colspan="1" rowspan="1"><p>OLED VCC</p>
 </td></tr>
 </table>
-<p class="image-container"><img style="width: 601.70px" src="img\\db7478b41ee52993.png"></p>
 
 
       </google-codelab-step>
@@ -182,12 +182,15 @@
         <p>上記のピンアサイン変更に合わせてライブラリのソースを変更します。</p>
 <p>Arduboyのライブラリは、ArduinoのGPIO関数を使用していない（高速化のため？）ので、ちょっと面倒です。</p>
 <h3 is-upgraded>Arduboy2Core.h（AKOBONEBOY定義追加 15行～）</h3>
+<p>AKBON2020用にAKBONEBOYを定義します。</p>
 <pre><code>#ifdef __AVR_ATmega328P__
   #warning SLIMBOY!
   #define SLIMBOY
   #define AKBONEBOY       // support AKBONE2020
 #endif</code></pre>
 <h3 is-upgraded>Arduboy2Core.h（LED PIN定義変更 66行～）</h3>
+<p>LEDのI/Oピンの割当を変更します。<br>I/Oの変更は、①ピン番号(D15等)、②ピンに対応するGPIOモジュール名称(PORTB等)、③ピンに対応するGPIOモジュールのピン番号(ビット位置)の3つが変更対象になります。</p>
+<p>ここでは、各LED(R, G, B)はBUILTIN_LED(13)を割り当てます。</p>
 <pre><code>// LED pin assign
 #ifdef SLIMBOY
   #ifdef AKBONEBOY
@@ -232,6 +235,7 @@
   #define BLUE_LED_BIT PORTB5
 #endif</code></pre>
 <h3 is-upgraded>Arduboy2Core.h（BUTTON PIN定義変更 119行～）</h3>
+<p>LEDと同様に各ボタンの定義を変更します。</p>
 <pre><code>// BUTTON pin assign
 #ifdef SLIMBOY
   #ifdef AKBONEBOY
@@ -309,6 +313,7 @@
   #endif
 #endif</code></pre>
 <h3 is-upgraded>Arduboy2Core.cpp（BUTTON PIN変更 175行～）</h3>
+<p>各GPIOモジュール（PORTBやPORTC等）の範囲を超えてピン割当を変更した場合は、このレジスタの初期化部分の変更が必要です。LEDの設定は削除しています。</p>
 <pre><code>void Arduboy2Core::bootPins()
 {
 #ifdef SLIMBOY
@@ -359,12 +364,16 @@
 
 #endif </code></pre>
 <h3 is-upgraded>Arduboy2Tones.h（AKOBONEBOY定義追加 44行～）</h3>
+<p>Arduboy2TonesもArduboy2Coreと同様の変更を行います。</p>
+<p>（Arduboy2CoreにもAudioの定義がありますが、使用しません）</p>
 <pre><code>#ifdef __AVR_ATmega328P__
 #warning SLIMBOY!
 #define SLIMBOY
 #define AKBONEBOY       // support AKBONE2020
 #endif</code></pre>
 <h3 is-upgraded>Arduboy2Tones.h（Speaker PIN定義変更 128行～）</h3>
+<p>AKBONE2020のSpeakerから音が出るように、デフォルトのD9からD15に変更します。</p>
+<p>ArduboyのSpeakerはI/Oピンを2本使うようになっていますが、ここでは1本（D15)のみ使用し、もう一方のSpeaker端子はGNDに接続します。</p>
 <pre><code>#ifdef SLIMBOY
   #ifdef AKBONEBOY
   // Slimboy speaker pin 1 = Arduino pin 15 = ATmega328 PC1
@@ -394,10 +403,41 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ビルド" duration="0">
-        <p>Arduino環境からpicovaders.inoを開きます。<br>ボードの設定は、以下を参照してください。</p>
+      <google-codelab-step label="picovadersの変更と書込み" duration="0">
+        <h2 is-upgraded>ボード設定</h2>
+<p>ボードの設定は、以下を参照してください。</p>
 <p>AKBON2020が接続されているシリアルポートを設定したのち、コンパイルと書込みを行います。</p>
-<p class="image-container"><img style="width: 601.70px" src="img\\642fe3d311d88936.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img\\d2e5ac5703d6a467.png"></p>
+<h2 is-upgraded>picovadersの変更</h2>
+<p>Arduino環境からpicovaders.inoを開き、以下の変更を行います。</p>
+<ul>
+<li>Arduboy⇒Arduboy2に変更</li>
+<li>soundをArduboyTonesに変更</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img\\2fe9667d64676321.png"></p>
+<h2 is-upgraded>コンパイルと書込み</h2>
+<p>スケッチのコンパイルとマイコンボードへの書込みを行います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img\\cce17f1eaf67363d.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="遊び方" duration="0">
+        <p>ゲームスタートはAまたはBボタンです。Bボタンはサイレントモードです。</p>
+<p>砲台の移動はBUTTON_LEFTとBUTTON＿RIGHTです。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="参考サイト" duration="0">
+        <p>以下のサイトを参考にさせていただきました。感謝！</p>
+<ul>
+<li><a href="https://mobile.k05.biz/e/2020/04/arduboy-i2c-display.html" target="_blank">【前編】ArduBoyを試作する【I2C OLED display】</a></li>
+<li><a href="https://mobile.k05.biz/e/2020/04/arduboy-i2c-gamepad.html" target="_blank">【後編】ArduBoyを試作する【Gamepad,Speaker</a></li>
+<li><a href="https://epanisognathous29.rssing.com/chan-15345426/article288-live.html" target="_blank">【ArduBoy2】インベーダー風ゲーム「picovaders」を動かしてみる</a></li>
+<li><a href="https://blog.boochow.com/article/441601807.html" target="_blank">インベーダーゲームを作ってみる（１）どんなゲームだったのか</a></li>
+<li><a href="https://qiita.com/nanbuwks/items/fc887d1d354c544a4288" target="_blank">AKBONE2020 用の Windows ポータブル開発環境を構築する ( LGT8F328P - Arduino の設定 )</a></li>
+</ul>
 
 
       </google-codelab-step>
