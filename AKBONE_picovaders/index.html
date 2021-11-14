@@ -42,7 +42,7 @@
 </td><td colspan="1" rowspan="1"><p>秋葉原ロボット部にて開発したLGT8F328Pマイコンを仕様したはんだ付けのトレーニングキットです。</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Arduboy</p>
-</td><td colspan="1" rowspan="1"><p>アルデュボーイはArduinoベースで動くオープンソースで開発されたゲームマシン。白黒の小型有機ELディス8bitゲームを遊ぶことができる。</p>
+</td><td colspan="1" rowspan="1"><p>ArduboyはArduinoベースで動くオープンソースで開発されたゲームマシン。白黒の小型有機ELディス8bitゲームを遊ぶことができる。</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>picovaders</p>
 </td><td colspan="1" rowspan="1"><p>@boochowp氏開発のインベーダーゲーム</p>
@@ -416,6 +416,8 @@
 </ul>
 <p class="image-container"><img style="width: 601.70px" src="img\\2fe9667d64676321.png"></p>
 <h2 is-upgraded>コンパイルと書込み</h2>
+<p>プログラムを書込む際にはAKBONE2020のジャンパピンを3.3V（左側）に切り替えます。5Vの設定の場合には、USB-SerialのI/O電圧が3.3V固定のため、DTRによるLGT8F328Pのリセットに失敗する場合があります。Arduboyの実行時は、3.3V、5Vのどちらでも構いません。</p>
+<h2 is-upgraded><img style="width: 601.70px" src="img\\e8e9443a72b3e613.png"></h2>
 <p>スケッチのコンパイルとマイコンボードへの書込みを行います。</p>
 <p class="image-container"><img style="width: 601.70px" src="img\\cce17f1eaf67363d.png"></p>
 
